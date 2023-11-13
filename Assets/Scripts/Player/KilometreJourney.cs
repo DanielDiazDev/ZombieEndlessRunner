@@ -5,7 +5,7 @@ public class KilometreJourney : MonoBehaviour
 {
     private float _distanceJourney = 0.0f;
     private Vector3 _previousPosition;
-    public event Action<float> OnKilometreJourney;
+    public static event Action<float> OnKilometreJourney;
    
     // Start is called before the first frame update
     void Start()

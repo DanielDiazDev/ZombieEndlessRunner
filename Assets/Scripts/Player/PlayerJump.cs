@@ -6,11 +6,12 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private Transform _feetPosition;
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private Vector3 _boxController;
-    private Rigidbody2D _rigidbody;
     [SerializeField] private bool _isGrounded;
     [SerializeField] private Animator _animator;
+    [SerializeField] private AudioClip _jumpClip;
+    private Rigidbody2D _rigidbody;
 
-   
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -25,8 +26,9 @@ public class PlayerJump : MonoBehaviour
         {
             if (_isGrounded)
             {
-                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0f); // Detén la velocidad vertical actual antes de saltar
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0f); 
                 _rigidbody.AddForce(Vector2.up * _forceJump, ForceMode2D.Impulse);
+                SoundController.Instance.PlaySound(_jumpClip);
             }
         }
         _animator.SetFloat("Vertical", _rigidbody.velocity.y);

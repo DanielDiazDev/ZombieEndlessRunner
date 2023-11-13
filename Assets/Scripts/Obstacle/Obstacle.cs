@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    private DeathController _deathController;
+    private PlayerDeathEventDispatcher _playerDeathEventDispatcher;
 
     private void Start()
     {
-        _deathController = GameObject.FindGameObjectWithTag("DeathController").GetComponent<DeathController>();
+        _playerDeathEventDispatcher = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDeathEventDispatcher>();
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _deathController.PlayerDead();
+            _playerDeathEventDispatcher.PlayerDead();
         }
     }
 }

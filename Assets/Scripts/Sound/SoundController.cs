@@ -1,43 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class SoundController : MonoBehaviour
 {
-   public static SoundController Instance; //Mejorar esto
-    [SerializeField] private AudioSource _soundFX;
-    [SerializeField] private AudioSource _musicSource;
-    //Audio mixer
-
+    public static SoundController Instance;
+    [SerializeField] private AudioMixer _mixer;
+    [SerializeField] private Slider _sliderMusic;
+    [SerializeField] private Slider _sliderSFX;
+    [SerializeField] private AudioSource _sourceSFX;
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
         DontDestroyOnLoad(gameObject);
     }
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("musicVolume"))
+        {
+            LoadMusicVolume();
+        }
+        else
+        {
+            SetMusicVolume();
+            SetSFXVolume();
+        }
+       
+    }
+    
+    public void PlaySound(AudioClip clip)
+    {
+        _sourceSFX.clip = clip;
+        _sourceSFX.PlayOneShot(clip);
+    }   
+    public void SetMusicVolume()
+    {
+        var volume = _sliderMusic.value;
+        _mixer.SetFloat("music", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("musicVolume", volume);
+        PlayerPrefs.Save();
+    }
+    public void SetSFXVolume()
+    {
+        var volume = _sliderSFX.value;
+        _mixer.SetFloat("sfx", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+        PlayerPrefs.Save();
+    }
 
-    public void PlaySound(AudioClip soundClip, float volume = 1.0f)
+    public void LoadMusicVolume()
     {
-        _soundFX.volume = volume;
-        _soundFX.clip = soundClip;
-        _soundFX.Play();
-    }
-    public void PlayMusic(AudioClip musicClip, float volume = 1.0f)
-    {
-        _musicSource.volume = volume;
-        _musicSource.clip = musicClip;
-        _musicSource.Play();
-    }
-    public void StopMusic()
-    {
-        _musicSource.Stop();
+        _sliderMusic.value = PlayerPrefs.GetFloat("musicVolume");
+        _sliderSFX.value = PlayerPrefs.GetFloat("SFXVolume");
+        SetMusicVolume();
     }
 
-    //Añadir para subir y bajar el volumen
+    
 }

@@ -6,9 +6,10 @@ public class DesactivePlatform : MonoBehaviour
 {
     [SerializeField] private Transform _endPosition;
     [SerializeField] private GameObject _platform;
-    private Transform _playerPosition;
     [SerializeField] private float _distanceExpected;
-    private bool _levelDone = false;
+    private bool _levelDone;
+    private Transform _playerPosition;
+
     private void Start()
     {
         _playerPosition = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().transform;

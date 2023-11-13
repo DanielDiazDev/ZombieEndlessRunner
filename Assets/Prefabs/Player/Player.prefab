@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7505093761639841826}
   - component: {fileID: 7505093761639841853}
   - component: {fileID: 7505093761639841852}
+  - component: {fileID: 1482358516970010196}
   - component: {fileID: 7505093761639841825}
   - component: {fileID: 7505093761639841855}
   - component: {fileID: 7505093761639841854}
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 807038d5e113a6b4b98d0402967594b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -105,7 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 5
-  _dearhController: {fileID: 0}
   _animator: {fileID: 1920778748}
 --- !u!114 &7505093761639841853
 MonoBehaviour:
@@ -127,6 +127,7 @@ MonoBehaviour:
   _boxController: {x: 0.67, y: 0.25, z: 0}
   _isGrounded: 0
   _animator: {fileID: 1920778748}
+  _jumpClip: {fileID: 8300000, guid: 4e349dc959014a845b9aa317d1c2b7f0, type: 3}
 --- !u!114 &7505093761639841852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +140,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915e5c06a22343849b01f2739c7d6172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dearhController: {fileID: 0}
   _animator: {fileID: 1920778748}
+--- !u!114 &1482358516970010196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7505093761639841849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1a26d9792714249b06c1e85c123e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: a8f8ece8e7c03ed46aff9825a71407d4, type: 3}
 --- !u!114 &7505093761639841825
 MonoBehaviour:
   m_ObjectHideFlags: 0

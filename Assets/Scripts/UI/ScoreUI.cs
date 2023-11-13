@@ -6,13 +6,12 @@ using UnityEngine;
 public class ScoreUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _scoreText;
-    private KilometreJourney _kilometreJourney;
     private void OnEnable()
 
     {
-        _kilometreJourney = GameObject.FindGameObjectWithTag("Player").GetComponent<KilometreJourney>();
-        _kilometreJourney.OnKilometreJourney += ShowScore;
+        KilometreJourney.OnKilometreJourney += ShowScore;
     }
+    
 
     public void ShowScore(float score)
     {
@@ -21,7 +20,7 @@ public class ScoreUI : MonoBehaviour
 
     private void OnDisable()
     {
-        _kilometreJourney.OnKilometreJourney -= ShowScore;
+        KilometreJourney.OnKilometreJourney -= ShowScore;
 
     }
 

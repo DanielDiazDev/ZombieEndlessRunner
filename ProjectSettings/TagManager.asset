@@ -9,6 +9,7 @@ TagManager:
   - DeathController
   - HighScore
   - Start
+  - BackgroundMusic
   layers:
   - Default
   - TransparentFX

@@ -7,20 +7,21 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
-    private Rigidbody2D _rigidbody;
-    private bool _isDie;
-    [SerializeField] private DeathController _dearhController;
     [SerializeField] private Animator _animator;
-    private StartGame startGame;
+    private Rigidbody2D _rigidbody;
+    private bool _isDie;    
     private bool _isStarted;
+
     private void OnEnable()
     {
-        startGame = GameObject.FindGameObjectWithTag("Start").GetComponent<StartGame>();
-        startGame.OnStarted += Started;
+        GameStarter.OnStarted += Started;
+        PlayerDeathEventDispatcher.OnPlayerDeath += StopMove;
     }
     private void OnDisable()
     {
-        startGame.OnStarted -= Started;
+        GameStarter.OnStarted -= Started;
+        PlayerDeathEventDispatcher.OnPlayerDeath -= StopMove;
+
     }
 
     private void Started(bool obj)
@@ -31,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _dearhController.OnPlayerDeath += StopMove;
+      //  _dearhController.OnPlayerDeath += StopMove;
     }
     private void FixedUpdate()
     {

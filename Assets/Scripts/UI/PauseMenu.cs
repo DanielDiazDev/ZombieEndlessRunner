@@ -6,36 +6,51 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenu;
-    [SerializeField] private GameObject _pauseButton; 
+    [SerializeField] private GameObject _pauseButton;
+    [SerializeField] private AudioClip _audioClip;
+    private ICommand _resumeCommand;
+    private ICommand _goToPauseCommand;
+    private ICommand _resetGameCommand;
+    private ICommand _closePauseommand;
+
+    private void Start()
+    {
+        _resumeCommand = new ResumeCommand();
+        _goToPauseCommand = new GoToPauseCommand();
+        _resetGameCommand = new ResetGameCommand();
+        _closePauseommand = new ClosePauseCommand();
+    }
 
     public void Pause()
     {
-        Time.timeScale = 0f;
+        SoundController.Instance.PlaySound(_audioClip);
+
+        _goToPauseCommand.Execute();
         _pauseButton.SetActive(false);
         _pauseMenu.SetActive(true);
     }
     public void Resume()
     {
-        Time.timeScale = 1f;
+        SoundController.Instance.PlaySound(_audioClip);
+
+        _resumeCommand.Execute();
         _pauseButton.SetActive(true);
         _pauseMenu.SetActive(false);
     }
     public void Reset()
     {
+        SoundController.Instance.PlaySound(_audioClip);
 
+        _resetGameCommand.Execute();
         Time.timeScale = 1f;
-       SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Ussar command
-      //  _pauseButton.SetActive(true);
-     //   _pauseMenu.SetActive(false);
+
+
     }
-     public void Exit()
+    public void ClsoePause()
     {
+        SoundController.Instance.PlaySound(_audioClip);
 
-        Time.timeScale = 1f;
-
-        SceneManager.LoadScene("Menu");
-        //  _pauseButton.SetActive(true);
-        //   _pauseMenu.SetActive(false);
+        _closePauseommand.Execute();
     }
 
 }
